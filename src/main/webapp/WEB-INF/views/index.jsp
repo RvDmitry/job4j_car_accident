@@ -9,30 +9,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        th {
+            text-align: center;
+        }
+    </style>
     <title>Accident</title>
 </head>
 <body>
-<div class="container pt-2">
-    <h3>Hello : ${user}</h3>
-</div>
-<div class="container pt-4">
+<div class="container pt-3">
     <table class="table table-bordered">
-        <c:set var="count" value="0" />
         <thead>
         <tr>
-            <th scope="col" style="width: 10%; text-align: center">#</th>
+            <th scope="col" style="width: 10%">Id</th>
             <th scope="col">Name</th>
+            <th scope="col">Text</th>
+            <th scope="col">Address</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${lists}" var="str">
-            <c:set var="count" value="${count+1}" />
+        <c:forEach items="${accidents}" var="accident">
             <tr>
                 <td style="text-align: center">
-                    <c:out value="${count}" />
+                    <c:out value="${accident.id}"/>
                 </td>
                 <td>
-                    <c:out value="${str}"/>
+                    <c:out value="${accident.name}"/>
+                </td>
+                <td>
+                    <c:out value="${accident.text}"/>
+                </td>
+                <td>
+                    <c:out value="${accident.address}"/>
                 </td>
             </tr>
         </c:forEach>

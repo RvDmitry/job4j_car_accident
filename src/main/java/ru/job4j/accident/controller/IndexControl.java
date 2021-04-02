@@ -1,15 +1,13 @@
-package ru.job4j.accident.control;
+package ru.job4j.accident.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.Arrays;
-import java.util.List;
+import ru.job4j.accident.repository.AccidentMem;
 
 /**
  * Class IndexControl
- *
+ * Класс реализует контроллер для главной страницы.
  * @author Dmitry Razumov
  * @version 1
  */
@@ -17,9 +15,7 @@ import java.util.List;
 public class IndexControl {
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("user", "Petr Arsentev");
-        List<String> lists = Arrays.asList("One", "Two", "Three", "Four", "Five");
-        model.addAttribute("lists", lists);
+        model.addAttribute("accidents", AccidentMem.instOf().findAllAccidents());
         return "index";
     }
 }
