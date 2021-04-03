@@ -1,4 +1,4 @@
-package ru.job4j.accident.controller;
+package ru.job4j.accident.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import ru.job4j.accident.repository.AccidentMem;
 public class IndexControl {
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("accidents", AccidentMem.instOf().findAllAccidents());
+        model.addAttribute("accidents", new AccidentMem().findAllAccidents());
         return "index";
     }
 }

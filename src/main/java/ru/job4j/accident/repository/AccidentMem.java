@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class AccidentMem
@@ -14,44 +15,23 @@ import java.util.*;
 @Repository
 public class AccidentMem {
     /**
-     * Синглтон, создает объект хранилища.
+     * Поле генерирует идентификатор инцидента.
      */
-    private static final AccidentMem INST = new AccidentMem();
+    private static final AtomicInteger ACCIDENT_ID = new AtomicInteger();
     /**
      * Коллекция хранит инциденты.
      */
-    private final Map<Integer, Accident> accidents = new HashMap<>();
-
-    /**
-     * Конструктор - создает инциденты.
-     */
-    private AccidentMem() {
-        Accident one = Accident.of(1, "Name 1", "Text 1", "Address 1");
-        Accident two = Accident.of(2, "Name 2", "Text 2", "Address 2");
-        Accident three = Accident.of(3, "Name 3", "Text 3", "Address 3");
-        Accident four = Accident.of(4, "Name 4", "Text 4", "Address 4");
-        Accident five = Accident.of(5, "Name 5", "Text 5", "Address 5");
-        accidents.put(one.getId(), one);
-        accidents.put(two.getId(), two);
-        accidents.put(three.getId(), three);
-        accidents.put(four.getId(), four);
-        accidents.put(five.getId(), five);
-    }
-
-    /**
-     * Метод возвращает синглтон.
-     * @return Синглтон.
-     */
-    public static AccidentMem instOf() {
-        return INST;
-    }
+    private static final Map<Integer, Accident> ACCIDENTS = new HashMap<>();
 
     /**
      * Метод сохраняет инцидент в хранилище.
      * @param accident Инцидент.
      */
-    public void save(Accident accident) {
-        accidents.put(accident.getId(), accident);
+    public void create(Accident accident) {
+        if (accident.getId() == 0) {
+            accident.setId(ACCIDENT_ID.incrementAndGet());
+        }
+        ACCIDENTS.put(accident.getId(), accident);
     }
 
     /**
@@ -60,7 +40,7 @@ public class AccidentMem {
      * @return Инцидент.
      */
     public Accident findAccidentById(int id) {
-        return accidents.get(id);
+        return ACCIDENTS.get(id);
     }
 
     /**
@@ -68,6 +48,6 @@ public class AccidentMem {
      * @return Список инцидентов.
      */
     public Collection<Accident> findAllAccidents() {
-        return accidents.values();
+        return ACCIDENTS.values();
     }
 }
