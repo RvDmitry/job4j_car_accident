@@ -2,6 +2,7 @@ package ru.job4j.accident.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,6 +23,22 @@ public class AccidentMem {
      * Коллекция хранит инциденты.
      */
     private static final Map<Integer, Accident> ACCIDENTS = new HashMap<>();
+    /**
+     * Коллекция хранит типы инцидентов.
+     */
+    private final Map<Integer, AccidentType> types = new HashMap<>();
+
+    /**
+     * Конструктор инициализирует хранилище инцидентов.
+     */
+    public AccidentMem() {
+        AccidentType first = AccidentType.of(1, "Две машины");
+        AccidentType second = AccidentType.of(2, "Машина и человек");
+        AccidentType third = AccidentType.of(3, "Машина и велосипед");
+        types.put(first.getId(), first);
+        types.put(second.getId(), second);
+        types.put(third.getId(), third);
+    }
 
     /**
      * Метод сохраняет инцидент в хранилище.
@@ -31,6 +48,8 @@ public class AccidentMem {
         if (accident.getId() == 0) {
             accident.setId(ACCIDENT_ID.incrementAndGet());
         }
+        AccidentType type = types.get(accident.getType().getId());
+        accident.setType(type);
         ACCIDENTS.put(accident.getId(), accident);
     }
 
@@ -49,5 +68,13 @@ public class AccidentMem {
      */
     public Collection<Accident> findAll() {
         return ACCIDENTS.values();
+    }
+
+    /**
+     * Метод возвращает список типов инцидента.
+     * @return Список типов.
+     */
+    public Collection<AccidentType> loadTypes() {
+        return types.values();
     }
 }

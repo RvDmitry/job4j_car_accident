@@ -28,6 +28,7 @@
             <th scope="col">Name</th>
             <th scope="col">Text</th>
             <th scope="col">Address</th>
+            <th scope="col">Type</th>
             <th scope="col">Edit accident</th>
         </tr>
         </thead>
@@ -45,6 +46,9 @@
                 </td>
                 <td style="vertical-align: middle">
                     <c:out value="${accident.address}"/>
+                </td>
+                <td style="vertical-align: middle">
+                    <c:out value="${accident.type.name}"/>
                 </td>
                 <td>
                     <a href="<c:url value='/edit?id=${accident.id}'/>">Edit</a>

@@ -25,6 +25,10 @@ public class Accident {
      * Адрес инцидента.
      */
     private String address;
+    /**
+     * Тип инцидента.
+     */
+    private AccidentType type;
 
     /**
      * Фабрика создает инцидент.
@@ -34,12 +38,13 @@ public class Accident {
      * @param address Адрес.
      * @return Инцидент.
      */
-    public static Accident of(int id, String name, String text, String address) {
+    public static Accident of(int id, String name, String text, String address, AccidentType type) {
         Accident accident = new Accident();
         accident.id = id;
         accident.name = name;
         accident.text = text;
         accident.address = address;
+        accident.type = type;
         return accident;
     }
 
@@ -107,6 +112,22 @@ public class Accident {
         this.address = address;
     }
 
+    /**
+     * Метод возвращает тип инцидента.
+     * @return Тип инцидента.
+     */
+    public AccidentType getType() {
+        return type;
+    }
+
+    /**
+     * Метод задает тип инцидента.
+     * @param type Тип инцидента.
+     */
+    public void setType(AccidentType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -131,6 +152,7 @@ public class Accident {
                 + ", name='" + name + '\''
                 + ", text='" + text + '\''
                 + ", address='" + address + '\''
+                + ", type=" + type
                 + '}';
     }
 }

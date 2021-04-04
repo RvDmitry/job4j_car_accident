@@ -33,6 +33,16 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="type.id" class="col-sm-2 col-form-label">Тип</label>
+            <div class="col-sm-10">
+                <select id="type.id" name="type.id">
+                    <c:forEach var="type" items="${types}" >
+                        <option value="${type.id}">${type.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>

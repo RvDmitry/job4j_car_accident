@@ -29,7 +29,8 @@ public class AccidentControl {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("types", new AccidentMem().loadTypes());
         return "accident/create";
     }
 
@@ -45,6 +46,7 @@ public class AccidentControl {
         Accident accident = accidents.findById(id);
         LOG.info("Редактирование инцидента: {}", accident);
         model.addAttribute("accident", accident);
+        model.addAttribute("types", new AccidentMem().loadTypes());
         return "accident/edit";
     }
 }
