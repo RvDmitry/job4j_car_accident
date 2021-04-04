@@ -29,6 +29,7 @@
             <th scope="col">Text</th>
             <th scope="col">Address</th>
             <th scope="col">Type</th>
+            <th scope="col">Rules</th>
             <th scope="col">Edit accident</th>
         </tr>
         </thead>
@@ -50,7 +51,12 @@
                 <td style="vertical-align: middle">
                     <c:out value="${accident.type.name}"/>
                 </td>
-                <td>
+                <td style="vertical-align: middle">
+                    <c:forEach items="${accident.rules}" var="rule">
+                        <c:out value="${rule.name}"/> <br>
+                    </c:forEach>
+                </td>
+                <td style="vertical-align: middle">
                     <a href="<c:url value='/edit?id=${accident.id}'/>">Edit</a>
                 </td>
             </tr>

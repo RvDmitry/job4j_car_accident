@@ -1,6 +1,7 @@
 package ru.job4j.accident.model;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class Accident
@@ -29,6 +30,10 @@ public class Accident {
      * Тип инцидента.
      */
     private AccidentType type;
+    /**
+     * Набор статей, которые были нарушены при инциденте.
+     */
+    private Set<Rule> rules;
 
     /**
      * Фабрика создает инцидент.
@@ -128,6 +133,22 @@ public class Accident {
         this.type = type;
     }
 
+    /**
+     * Метод возвращает набор статей.
+     * @return Набор статей.
+     */
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    /**
+     * Метод задает набор статей.
+     * @param rules Набор статей.
+     */
+    public void setRules(Set<Rule> rules) {
+        this.rules = rules;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -153,6 +174,7 @@ public class Accident {
                 + ", text='" + text + '\''
                 + ", address='" + address + '\''
                 + ", type=" + type
+                + ", rules=" + rules
                 + '}';
     }
 }

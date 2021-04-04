@@ -43,6 +43,23 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="rIds" class="col-sm-2 col-form-label">Статьи</label>
+            <div class="col-sm-10">
+                <select id="rIds" name="rIds" multiple>
+                    <c:forEach var="rule" items="${rules}" >
+                        <option value="${rule.id}"
+                                <c:forEach var="rl" items="${accident.rules}">
+                                    <c:if test="${rule.id == rl.id}">
+                                        selected
+                                    </c:if>
+                                </c:forEach>
+                        >${rule.name}
+                        </option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>
