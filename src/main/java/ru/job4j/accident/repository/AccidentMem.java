@@ -39,7 +39,7 @@ public class AccidentMem {
      * @param id Идентификатор.
      * @return Инцидент.
      */
-    public Accident findAccidentById(int id) {
+    public Accident findById(int id) {
         return ACCIDENTS.get(id);
     }
 
@@ -47,7 +47,7 @@ public class AccidentMem {
      * Метод возвращает все инциденты из хранилища.
      * @return Список инцидентов.
      */
-    public Collection<Accident> findAllAccidents() {
+    public Collection<Accident> findAll() {
         return ACCIDENTS.values();
     }
 }

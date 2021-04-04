@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
@@ -40,7 +41,8 @@ public class AccidentControl {
     }
 
     @GetMapping("/edit")
-    public String edit(@ModelAttribute Accident accident, Model model) {
+    public String edit(@RequestParam("id") int id, Model model) {
+        Accident accident = accidents.findById(id);
         LOG.info("Редактирование инцидента: {}", accident);
         model.addAttribute("accident", accident);
         return "accident/edit";

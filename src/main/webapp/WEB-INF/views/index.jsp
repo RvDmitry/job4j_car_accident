@@ -47,13 +47,7 @@
                     <c:out value="${accident.address}"/>
                 </td>
                 <td>
-                    <form action="<c:url value="/edit"/>">
-                        <input type="hidden" name="id" value="${accident.id}">
-                        <input type="hidden" name="name" value="${accident.name}">
-                        <input type="hidden" name="text" value="${accident.text}">
-                        <input type="hidden" name="address" value="${accident.address}">
-                        <button type="submit" class="btn btn-secondary">Edit</button>
-                    </form>
+                    <a href="<c:url value='/edit?id=${accident.id}'/>">Edit</a>
                 </td>
             </tr>
         </c:forEach>

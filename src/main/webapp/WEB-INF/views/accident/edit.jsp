@@ -13,8 +13,7 @@
 </head>
 <body>
 <div class="container pt-3">
-    <form action="<c:url value='/save'/>" method='POST'>
-        <input type="hidden" name="id" value="${accident.id}">
+    <form action="<c:url value='/save?id=${accident.id}'/>" method='POST'>
         <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Название</label>
             <div class="col-sm-10">
