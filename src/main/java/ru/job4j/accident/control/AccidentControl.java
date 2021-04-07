@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
@@ -28,9 +28,9 @@ public class AccidentControl {
 
     private static final Logger LOG = LoggerFactory.getLogger(AccidentControl.class.getName());
 
-    private final AccidentMem accidents;
+    private final AccidentJdbcTemplate accidents;
 
-    public AccidentControl(AccidentMem accidents) {
+    public AccidentControl(AccidentJdbcTemplate accidents) {
         this.accidents = accidents;
     }
 
@@ -53,8 +53,8 @@ public class AccidentControl {
             }
         }
         accident.setRules(rules);
-        LOG.info("Сохранение инцидента: {}", accident);
-        accidents.create(accident);
+        accident = accidents.save(accident);
+        LOG.info("Инцидент - {} сохранен.", accident);
         return "redirect:/";
     }
 

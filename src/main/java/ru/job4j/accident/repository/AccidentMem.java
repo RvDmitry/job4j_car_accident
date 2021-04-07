@@ -54,12 +54,14 @@ public class AccidentMem {
     /**
      * Метод сохраняет инцидент в хранилище.
      * @param accident Инцидент.
+     * @return Сохраненный инцидент.
      */
-    public void create(Accident accident) {
+    public Accident save(Accident accident) {
         if (accident.getId() == 0) {
             accident.setId(ACCIDENT_ID.incrementAndGet());
         }
         ACCIDENTS.put(accident.getId(), accident);
+        return accident;
     }
 
     /**
