@@ -23,7 +23,7 @@ import java.util.Set;
  * @author Dmitry Razumov
  * @version 1
  */
-@Repository
+//@Repository
 public class AccidentJdbcTemplate {
 
     private final JdbcTemplate jdbc;

@@ -1,5 +1,6 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,10 +10,14 @@ import java.util.Set;
  * @author Dmitry Razumov
  * @version 1
  */
+@Entity
+@Table(name = "accidents")
 public class Accident {
     /**
      * Идентификатор инцидента.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Наименование инцидента.
@@ -29,10 +34,16 @@ public class Accident {
     /**
      * Тип инцидента.
      */
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private AccidentType type;
     /**
      * Набор статей, которые были нарушены при инциденте.
      */
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "accidents_rules",
+            joinColumns = @JoinColumn(name = "accident_id"),
+            inverseJoinColumns = @JoinColumn(name = "rule_id"))
     private Set<Rule> rules;
 
     /**

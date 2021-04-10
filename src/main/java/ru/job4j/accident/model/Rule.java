@@ -1,5 +1,6 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -8,10 +9,14 @@ import java.util.Objects;
  * @author Dmitry Razumov
  * @version 1
  */
+@Entity
+@Table(name = "rules")
 public class Rule {
     /**
      * Идентификатор статьи.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Наименование статьи.
