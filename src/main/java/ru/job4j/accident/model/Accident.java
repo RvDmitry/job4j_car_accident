@@ -40,7 +40,7 @@ public class Accident {
     /**
      * Набор статей, которые были нарушены при инциденте.
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "accidents_rules",
             joinColumns = @JoinColumn(name = "accident_id"),
             inverseJoinColumns = @JoinColumn(name = "rule_id"))
