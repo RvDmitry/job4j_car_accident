@@ -19,11 +19,11 @@ public class AccidentMem {
     /**
      * Поле генерирует идентификатор инцидента.
      */
-    private static final AtomicInteger ACCIDENT_ID = new AtomicInteger();
+    private final AtomicInteger accidentId = new AtomicInteger();
     /**
      * Коллекция хранит инциденты.
      */
-    private static final Map<Integer, Accident> ACCIDENTS = new HashMap<>();
+    private final Map<Integer, Accident> accidents = new HashMap<>();
     /**
      * Коллекция хранит типы инцидентов.
      */
@@ -58,9 +58,9 @@ public class AccidentMem {
      */
     public Accident save(Accident accident) {
         if (accident.getId() == 0) {
-            accident.setId(ACCIDENT_ID.incrementAndGet());
+            accident.setId(accidentId.incrementAndGet());
         }
-        ACCIDENTS.put(accident.getId(), accident);
+        accidents.put(accident.getId(), accident);
         return accident;
     }
 
@@ -70,7 +70,7 @@ public class AccidentMem {
      * @return Инцидент.
      */
     public Accident findAccidentById(int id) {
-        return ACCIDENTS.get(id);
+        return accidents.get(id);
     }
 
     /**
@@ -78,7 +78,7 @@ public class AccidentMem {
      * @return Список инцидентов.
      */
     public Collection<Accident> findAllAccidents() {
-        return ACCIDENTS.values();
+        return accidents.values();
     }
 
     /**
