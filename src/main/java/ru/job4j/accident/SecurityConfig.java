@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 /**
  * Class SecurityConfig
  *
@@ -20,16 +22,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private DataSource ds;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder)
-                .withUser("user").password(passwordEncoder.encode("123456")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder.encode("123456"))
-                .roles("USER", "ADMIN");
+        auth.jdbcAuthentication()
+                .dataSource(ds)
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery(
+                        "SELECT username, password, enabled from users where username = ?"
+                )
+                .authoritiesByUsernameQuery(
+                        "SELECT u.username, a.authority "
+                                + "FROM authorities a, users u "
+                                + "WHERE u.username = ? "
+                                + "AND u.username = a.username"
+                );
     }
 
     @Bean
